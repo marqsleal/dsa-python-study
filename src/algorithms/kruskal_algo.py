@@ -1,4 +1,5 @@
 from enum import Enum
+
 from src.data_structures.graph import GraphBuild, sample_graph
 
 
@@ -9,7 +10,7 @@ class EdgesIndex(Enum):
     TO_NODE = 2
 
 
-def merge_sort_edges_by_weight(edges: list) -> list:
+def merge_sort_edges_by_weight(edges: list[tuple[int, str, str]]) -> list[tuple[int, str, str]]:
     if len(edges) <= 1:
         return edges
 
@@ -45,7 +46,7 @@ def find_node_parent(parent, node):
     return parent[node]
 
 
-def union_nodes(parent, rank, node1, node2):
+def union_nodes(parent: dict, rank: dict, node1, node2):
     root1 = find_node_parent(parent, node1)
     root2 = find_node_parent(parent, node2)
 
@@ -61,7 +62,7 @@ def union_nodes(parent, rank, node1, node2):
             rank[root1] += 1
 
 
-def kruskal_algorithm(graph: dict):
+def kruskal_algorithm(graph: dict) -> list[tuple[int, str, str]]:
     edges = []
     seen = set()
 
@@ -72,6 +73,38 @@ def kruskal_algorithm(graph: dict):
                 seen.add((from_node, to_node))
     
     sorted_edges = merge_sort_edges_by_weight(edges)
+
+    parent = {}
+    rank = {}
+    min_span_tree = []
+
+    for node in graph:
+        parent[node] = node
+        rank[node] = 0
+
+    for weight, from_node, to_node in sorted_edges:
+        if find_node_parent(parent, from_node) != find_node_parent(parent, to_node):
+            union_nodes(parent, rank, from_node, to_node)
+            min_span_tree.append((weight, from_node, to_node))
+
+    return min_span_tree
+
+
+class KruskalGraphBuild(GraphBuild):
+    """Graph class to build and represent the minimum spanning tree using Kruskal's algorithm."""
+    def __init__(self, min_span_tree: list):
+        super().__init__()
+        self.min_span_tree = min_span_tree
+
+        for edge in min_span_tree:
+            weight, from_node, to_node = edge
+            self.add_edge(from_node, to_node, weight)
+
+    def print_visited_nodes(self):
+        """Prints the nodes visited in the minimum spanning tree."""
+        print("Visited nodes in the Minimum Spanning Tree:")
+        for weight, from_node, to_node in self.min_span_tree:
+            print(f"{from_node} -- {to_node} == {weight}")
 
 
 def main():
