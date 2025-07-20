@@ -1,3 +1,6 @@
+"""Kruskal's Algorithm Barebones Python Implementation"""
+
+
 from enum import Enum
 
 from src.data_structures.graph import GraphBuild, sample_graph
@@ -11,6 +14,7 @@ class EdgesIndex(Enum):
 
 
 def merge_sort_edges_by_weight(edges: list[tuple[int, str, str]]) -> list[tuple[int, str, str]]:
+    """Sorts edges by weight using merge sort."""
     if len(edges) <= 1:
         return edges
 
@@ -23,6 +27,7 @@ def merge_sort_edges_by_weight(edges: list[tuple[int, str, str]]) -> list[tuple[
 
 
 def merge_lists(edges_left_half: list, edges_right_half: list) -> list:
+    """Merges two sorted lists of edges by weight."""
     sorted_list = []
     i, j = 0, 0
 
@@ -33,20 +38,22 @@ def merge_lists(edges_left_half: list, edges_right_half: list) -> list:
         else:
             sorted_list.append(edges_right_half[j])
             j += 1
-    
+
     sorted_list.extend(edges_left_half[i:])
     sorted_list.extend(edges_right_half[j:])
 
     return sorted_list
 
 
-def find_node_parent(parent, node):
+def find_node_parent(parent: dict, node: str) -> str:
+    """Finds the parent of a node in the disjoint set."""
     if parent[node] != node:
         parent[node] = find_node_parent(parent, parent[node])
     return parent[node]
 
 
-def union_nodes(parent: dict, rank: dict, node1, node2):
+def union_nodes(parent: dict, rank: dict, node1: str, node2: str):
+    """Unites two nodes in the disjoint set."""
     root1 = find_node_parent(parent, node1)
     root2 = find_node_parent(parent, node2)
 
@@ -63,6 +70,7 @@ def union_nodes(parent: dict, rank: dict, node1, node2):
 
 
 def kruskal_algorithm(graph: dict) -> list[tuple[int, str, str]]:
+    """Barebones implementation of Kruskal's algorithm to find the minimum spanning tree of a graph."""
     edges = []
     seen = set()
 
