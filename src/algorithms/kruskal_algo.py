@@ -72,7 +72,7 @@ def union_nodes(parent: dict[str, str], rank: dict[str, int], node1: str, node2:
 def kruskal_algorithm(
     graph: dict[str, list[tuple[str, int]]],
 ) -> list[tuple[int, str, str]]:
-    """Barebones implementation of Kruskal's algorithm to find the minimum spanning tree of a graph."""
+    """Barebones implementation of Kruskal's algorithm to find the min. spanning tree of a graph."""
     edges: list[tuple[int, str, str]] = []
     seen: set[tuple[str, str]] = set()
 

@@ -20,7 +20,7 @@ def find_min_edge(edges: list, visited: set) -> tuple[int, str, str] | None:
 def prim_algorithm(
     graph: dict[str, list[tuple[str, int]]], start_node: str
 ) -> list[tuple[int, str, str]]:
-    """Barebones implementation of Prim's algorithm to find the minimum spanning tree of a graph."""
+    """Barebones implementation of Prim's algorithm to find the min. spanning tree of a graph."""
     min_span_tree: list[tuple[int, str, str]] = []
     visited = set([start_node])
     edges = [(weight, start_node, to_node) for to_node, weight in graph[start_node]]
