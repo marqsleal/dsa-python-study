@@ -1,7 +1,8 @@
 """Kruskal's Algorithm Barebones Python Implementation"""
 
 from src.algorithms.utils import EdgesIndex
-from src.data_structures.graph import GraphBuild, sample_graph
+from src.data_structures.ds_sample import sample_graph
+from src.data_structures.graph import GraphBuild
 
 
 def merge_sort_edges_by_weight(
