@@ -4,7 +4,7 @@
 from graph import GraphBuild, sample_graph
 
 
-def find_min_edge(edges: list, visited: set) -> tuple[int, str, str]:
+def find_min_edge(edges: list, visited: set) -> tuple[int, str, str] | None:
     """Finds the minimum edge from the list of edges that connects to an unvisited node."""
     min_edge = None
     min_weight = float('inf')
