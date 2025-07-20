@@ -1,6 +1,5 @@
 """Kruskal's Algorithm Barebones Python Implementation"""
 
-
 from enum import Enum
 
 from src.data_structures.graph import GraphBuild, sample_graph
@@ -8,12 +7,15 @@ from src.data_structures.graph import GraphBuild, sample_graph
 
 class EdgesIndex(Enum):
     """Enum to represent the index of edges in a tuple."""
+
     WEIGHT = 0
     FROM_NODE = 1
     TO_NODE = 2
 
 
-def merge_sort_edges_by_weight(edges: list[tuple[int, str, str]]) -> list[tuple[int, str, str]]:
+def merge_sort_edges_by_weight(
+    edges: list[tuple[int, str, str]],
+) -> list[tuple[int, str, str]]:
     """Sorts edges by weight using merge sort."""
     if len(edges) <= 1:
         return edges
@@ -32,7 +34,10 @@ def merge_lists(edges_left_half: list, edges_right_half: list) -> list:
     i, j = 0, 0
 
     while i < len(edges_left_half) and j < len(edges_right_half):
-        if edges_left_half[i][EdgesIndex.WEIGHT.value] < edges_right_half[j][EdgesIndex.WEIGHT.value]:
+        if (
+            edges_left_half[i][EdgesIndex.WEIGHT.value]
+            < edges_right_half[j][EdgesIndex.WEIGHT.value]
+        ):
             sorted_list.append(edges_left_half[i])
             i += 1
         else:
@@ -79,7 +84,7 @@ def kruskal_algorithm(graph: dict) -> list[tuple[int, str, str]]:
             if (to_node, from_node) not in seen:
                 edges.append((weight, from_node, to_node))
                 seen.add((from_node, to_node))
-    
+
     sorted_edges = merge_sort_edges_by_weight(edges)
 
     parent = {}
@@ -100,6 +105,7 @@ def kruskal_algorithm(graph: dict) -> list[tuple[int, str, str]]:
 
 class KruskalGraphBuild(GraphBuild):
     """Graph class to build and represent the minimum spanning tree using Kruskal's algorithm."""
+
     def __init__(self, min_span_tree: list):
         super().__init__()
         self.min_span_tree = min_span_tree
@@ -116,8 +122,17 @@ class KruskalGraphBuild(GraphBuild):
 
 
 def main():
+    """Main function to demonstrate Kruskal's algorithm."""
     graph = sample_graph()
     graph.print_graph()
+    print(f"\nTotal weight of the graph: {graph.get_weight_sum()}\n")
+
+    kruskal_algorithm_result = kruskal_algorithm(graph.get_graph())
+
+    kruskal_graph = KruskalGraphBuild(kruskal_algorithm_result)
+    kruskal_graph.print_graph()
+    kruskal_graph.print_visited_nodes()
+    print(f"\nTotal weight of the graph: {kruskal_graph.get_weight_sum()}\n")
 
 
 if __name__ == "__main__":
