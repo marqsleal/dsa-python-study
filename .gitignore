@@ -1,0 +1,53 @@
+# Byte-compiled / optimized / compiled files
+__pycache__/
+*.pyc
+*.pyd
+*.pyo
+*.egg-info/
+
+# Distribution / packaging
+.Python
+build/
+dist/
+eggs/
+*.egg
+
+# Virtual environment
+.venv/
+venv/
+env/
+/bin
+/include
+/lib
+/local
+/share
+
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+*.bak
+*~
+.DS_Store # macOS
+Thumbs.db # Windows
+
+# Testing and coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.ruff_cache/
+
+# Logs and databases
+*.log
+*.sqlite3
+*.db
+
+# Temporary files
+*.tmp
+
+# Configuration files
+.env
+instance/
+
+# Jupyter Notebook files
+.ipynb_checkpoints/

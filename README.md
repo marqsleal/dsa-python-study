@@ -1,0 +1,3 @@
+# DSA Study with Python
+
+[Prim Algorithm](https://www.youtube.com/watch?v=cplfcGZmX7I) - Prim's Algorithm is a greedy algorithm used to find a Minimum Spanning Tree (MST) of a connected, weighted, and undirected graph. It starts with an arbitrary vertex and, at each step, adds the smallest edge that connects a vertex already in the MST to a vertex outside it. This process continues until all vertices are included in the MST.
