@@ -1,7 +1,14 @@
 """Prim's Algorithm Barebones Python Implementation"""
 
-
+from enum import Enum
 from src.data_structures.graph import GraphBuild, sample_graph
+
+
+class EdgesIndex(Enum):
+    """Enum to represent the index of edges in a tuple."""
+    WEIGHT = 0
+    FROM_NODE = 1
+    TO_NODE = 2
 
 
 def find_min_edge(edges: list, visited: set) -> tuple[int, str, str] | None:
@@ -40,7 +47,11 @@ def prim_algorithm(graph: dict, start_node: str) -> list[tuple[int, str, str]]:
         for next_to_node, next_weight in graph[to_node]:
             if next_to_node not in visited:
                 edges.append((next_weight, to_node, next_to_node))
-            edges = [edge for edge in edges if edge[2] != to_node or edge[0] != weight]
+            edges = [
+                edge for edge in edges
+                if edge[EdgesIndex.TO_NODE.value] != to_node
+                or edge[EdgesIndex.WEIGHT.value] != weight
+            ]
 
     return min_span_tree
 
