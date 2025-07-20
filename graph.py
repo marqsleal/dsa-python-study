@@ -23,14 +23,14 @@ class GraphBuild:
     def get_graph(self) -> dict[str, list[tuple[str, int]]]:
         """Returns the graph as a dictionary."""
         return self.graph
-    
+
     def get_weight_sum(self) -> int:
         """Calculates the total weight of all edges in the graph."""
         total_weight = 0
         for edges in self.graph.values():
             total_weight += sum(weight for _, weight in edges)
         return total_weight
-    
+
     def print_graph(self):
         """Prints the graph in a readable format."""
         for node, edges in self.graph.items():
