@@ -1,7 +1,7 @@
 """Prim's Algorithm Barebones Python Implementation"""
 
-from src.data_structures.graph import GraphBuild, sample_graph
 from src.algorithms.utils import EdgesIndex
+from src.data_structures.graph import GraphBuild, sample_graph
 
 
 def find_min_edge(edges: list, visited: set) -> tuple[int, str, str] | None:

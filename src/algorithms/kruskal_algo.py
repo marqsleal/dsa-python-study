@@ -1,7 +1,6 @@
 """Kruskal's Algorithm Barebones Python Implementation"""
 
 from src.algorithms.utils import EdgesIndex
-
 from src.data_structures.graph import GraphBuild, sample_graph
 
 
