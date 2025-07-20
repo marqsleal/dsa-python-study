@@ -28,7 +28,10 @@ def merge_sort_edges_by_weight(
     return merge_lists(edges_left_half, edges_right_half)
 
 
-def merge_lists(edges_left_half: list, edges_right_half: list) -> list:
+def merge_lists(
+    edges_left_half: list[tuple[int, str, str]],
+    edges_right_half: list[tuple[int, str, str]],
+) -> list[tuple[int, str, str]]:
     """Merges two sorted lists of edges by weight."""
     sorted_list = []
     i, j = 0, 0
@@ -57,7 +60,7 @@ def find_node_parent(parent: dict, node: str) -> str:
     return parent[node]
 
 
-def union_nodes(parent: dict, rank: dict, node1: str, node2: str):
+def union_nodes(parent: dict[str, str], rank: dict[str, int], node1: str, node2: str):
     """Unites two nodes in the disjoint set."""
     root1 = find_node_parent(parent, node1)
     root2 = find_node_parent(parent, node2)
@@ -74,10 +77,12 @@ def union_nodes(parent: dict, rank: dict, node1: str, node2: str):
             rank[root1] += 1
 
 
-def kruskal_algorithm(graph: dict) -> list[tuple[int, str, str]]:
+def kruskal_algorithm(
+    graph: dict[str, list[tuple[str, int]]],
+) -> list[tuple[int, str, str]]:
     """Barebones implementation of Kruskal's algorithm to find the minimum spanning tree of a graph."""
-    edges = []
-    seen = set()
+    edges: list[tuple[int, str, str]] = []
+    seen: set[tuple[str, str]] = set()
 
     for from_node in graph:
         for to_node, weight in graph[from_node]:
@@ -87,9 +92,9 @@ def kruskal_algorithm(graph: dict) -> list[tuple[int, str, str]]:
 
     sorted_edges = merge_sort_edges_by_weight(edges)
 
-    parent = {}
-    rank = {}
-    min_span_tree = []
+    parent: dict[str, str] = {}
+    rank: dict[str, int] = {}
+    min_span_tree: list[tuple[int, str, str]] = []
 
     for node in graph:
         parent[node] = node
@@ -106,7 +111,7 @@ def kruskal_algorithm(graph: dict) -> list[tuple[int, str, str]]:
 class KruskalGraphBuild(GraphBuild):
     """Graph class to build and represent the minimum spanning tree using Kruskal's algorithm."""
 
-    def __init__(self, min_span_tree: list):
+    def __init__(self, min_span_tree: list[tuple[int, str, str]]):
         super().__init__()
         self.min_span_tree = min_span_tree
 

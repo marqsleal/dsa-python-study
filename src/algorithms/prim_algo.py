@@ -6,6 +6,7 @@ from src.data_structures.graph import GraphBuild, sample_graph
 
 class EdgesIndex(Enum):
     """Enum to represent the index of edges in a tuple."""
+
     WEIGHT = 0
     FROM_NODE = 1
     TO_NODE = 2
@@ -14,7 +15,7 @@ class EdgesIndex(Enum):
 def find_min_edge(edges: list, visited: set) -> tuple[int, str, str] | None:
     """Finds the minimum edge from the list of edges that connects to an unvisited node."""
     min_edge = None
-    min_weight = float('inf')
+    min_weight = float("inf")
 
     for weight, from_node, to_node in edges:
         if to_node not in visited and weight < min_weight:
@@ -24,14 +25,13 @@ def find_min_edge(edges: list, visited: set) -> tuple[int, str, str] | None:
     return min_edge
 
 
-def prim_algorithm(graph: dict, start_node: str) -> list[tuple[int, str, str]]:
+def prim_algorithm(
+    graph: dict[str, list[tuple[str, int]]], start_node: str
+) -> list[tuple[int, str, str]]:
     """Barebones implementation of Prim's algorithm to find the minimum spanning tree of a graph."""
-    min_span_tree = []
+    min_span_tree: list[tuple[int, str, str]] = []
     visited = set([start_node])
-    edges = [
-        (weight, start_node, to_node)
-        for to_node, weight in graph[start_node]
-    ]
+    edges = [(weight, start_node, to_node) for to_node, weight in graph[start_node]]
 
     while edges:
         min_edge = find_min_edge(edges, visited)
@@ -48,7 +48,8 @@ def prim_algorithm(graph: dict, start_node: str) -> list[tuple[int, str, str]]:
             if next_to_node not in visited:
                 edges.append((next_weight, to_node, next_to_node))
             edges = [
-                edge for edge in edges
+                edge
+                for edge in edges
                 if edge[EdgesIndex.TO_NODE.value] != to_node
                 or edge[EdgesIndex.WEIGHT.value] != weight
             ]
@@ -58,7 +59,8 @@ def prim_algorithm(graph: dict, start_node: str) -> list[tuple[int, str, str]]:
 
 class PrimGraphBuild(GraphBuild):
     """Graph class to build and represent the minimum spanning tree using Prim's algorithm."""
-    def __init__(self, min_span_tree: list):
+
+    def __init__(self, min_span_tree: list[tuple[int, str, str]]):
         super().__init__()
         self.min_span_tree = min_span_tree
 

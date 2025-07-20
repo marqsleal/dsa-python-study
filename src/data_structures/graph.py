@@ -3,6 +3,7 @@
 
 class GraphBuild:
     """A class to build and manage a graph with weighted edges."""
+
     def __init__(self):
         self.graph: dict = {}
 
