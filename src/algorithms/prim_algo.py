@@ -1,15 +1,7 @@
 """Prim's Algorithm Barebones Python Implementation"""
 
-from enum import Enum
 from src.data_structures.graph import GraphBuild, sample_graph
-
-
-class EdgesIndex(Enum):
-    """Enum to represent the index of edges in a tuple."""
-
-    WEIGHT = 0
-    FROM_NODE = 1
-    TO_NODE = 2
+from src.algorithms.utils import EdgesIndex
 
 
 def find_min_edge(edges: list, visited: set) -> tuple[int, str, str] | None:

@@ -1,16 +1,8 @@
 """Kruskal's Algorithm Barebones Python Implementation"""
 
-from enum import Enum
+from src.algorithms.utils import EdgesIndex
 
 from src.data_structures.graph import GraphBuild, sample_graph
-
-
-class EdgesIndex(Enum):
-    """Enum to represent the index of edges in a tuple."""
-
-    WEIGHT = 0
-    FROM_NODE = 1
-    TO_NODE = 2
 
 
 def merge_sort_edges_by_weight(
