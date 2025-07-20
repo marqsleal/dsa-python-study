@@ -13,6 +13,6 @@
 
 [Dijkstra's Algorithm](https://www.youtube.com/watch?v=_lHSawdgXpI) – Dijkstra's Algorithm is a greedy algorithm used to find the shortest path from a starting node to all other nodes in a connected, weighted graph with non-negative edge weights. Unlike Prim's and Kruskal's Algorithms, which are designed to find a Minimum Spanning Tree (MST), **Dijkstra's Algorithm focuses on computing the minimum cumulative distance between nodes, building a shortest-path tree instead of an MST**. At each step, it selects the unvisited node with the smallest known distance and updates the distances to its neighboring nodes, repeating this process until all nodes have been visited.  
     - Final Time Complexity (Linear search for min + distance updates): $ O(V^2 + E) \approx O(V^2) $.  
-    - This is due to the min() operation over unvisited nodes in each iteration. Using a priority queue (min-heap), this can be improved to: $ O((V + E) \log V) $.  
+    - This is due to the min() operation over unvisited nodes in each iteration. Using a priority queue (min-heap), this can be improved to: $ O(V + E \log V) $.  
     - $V$ = total nodes in `graph.get_graph.keys()`.  
     - $E$ = total tuples `(to_node, weight)`.   
